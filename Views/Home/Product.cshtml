@@ -1,0 +1,47 @@
+@{
+    ViewData["Title"] = "Category";
+}
+@model Product
+<style>
+    .left,
+    .right{
+        display:inline-block;
+        width: 40%;
+        vertical-align: top;
+    }
+    .display-4{
+        margin-bottom: 3rem;
+    }
+    .left{
+        border-right: 3px solid black;
+        box-sizing: border-box;
+        padding-right: 2rem;
+    }
+</style>
+
+<div class = "text-center container">
+    <h1 class = "display-4">@ViewBag.retrieved.Name</h1>
+    <div class="left">
+        <h3>Categories</h3>
+        <ul>
+         @foreach (var association in ViewBag.retrieved.AllCategories)
+            {
+                <li>@association.Category.Name</li>
+            }
+        </ul>
+    </div>
+    <div class="right">
+        <h3>Add a Category</h3>
+        <form action="/productAssociation" method = "post">
+            <input type="hidden" name="ProductId" value="@ViewBag.retrieved.ProductId">
+            <select name="CategoryId" class="form-control">
+                @foreach (var category in ViewBag.unrelated)
+                {
+                    <option value="@category.CategoryId">@category.Name</option>
+                }
+            </select>
+
+            <input type="submit" value = "Add" class = "btn-outline-success">
+        </form>
+    </div>
+</div>

@@ -1,0 +1,67 @@
+@{
+    ViewData["Title"] = "Categories";
+}
+
+@model Category;
+<style>
+    .navigation a, p{
+        display: inline-block;
+        vertical-align: top;
+    }
+    .navigation p{
+    }
+
+    span{
+        display: block;
+    }
+    .btn{
+        margin-top: 10px;
+    }
+    .left,
+    .right{
+        display:inline-block;
+        width: 40%;
+        vertical-align: top;
+    }
+    .left{
+        border-right: 3px solid black;
+        box-sizing: border-box;
+        padding-right: 2rem;
+    }
+
+    .right{
+        margin-left: 2.35rem;
+    }
+    ul{
+        list-style-type: none;
+    }
+</style>
+<div class="container text-center">
+   <div class = "navigation">
+        <p class = "display-4"><a href="/">Products</a> | Categories</p>
+    </div>
+    <div class = "left">
+        <h2>New Category</h2>
+        <div class="form-group text-left">
+            <form action="/newcategory" method="post">
+
+                <label>Name</label>
+                <input type="text" name="Name" class="form-control">
+                <span asp-validation-for="Name"></span>
+
+                <div class = "text-right">
+                    <input type="submit" value="Add" class="btn btn-outline-primary"/>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <div class="right">
+        <h2>Existing Products</h2>
+        <ul>
+            @foreach( var category in ViewBag.All){
+                <li><a href="/category/@category.CategoryId">@category.Name</a></li>
+            }
+        </ul>
+    </div>
+</div>
